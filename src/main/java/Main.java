@@ -14,6 +14,22 @@ public class Main {
 //        System.out.println(resultOfEx4);
 //        printList(resultOfEx5);
         System.out.println(resultOfEx5);
+
+	Node<Integer> sampleNode1 = new Node<Integer>(1);
+	Node<Integer> sampleNode2 = new Node<Integer>(2);
+	Node<Integer> sampleNode3 = new Node<Integer>(3);
+	Node<Integer> sampleNode4 = new Node<Integer>(4);
+	Node<Integer> sampleNode5 = new Node<Integer>(1);
+	Node<Integer> sampleNode6 = new Node<Integer>(2, null);
+
+	sampleNode1.setNext(sampleNode2);
+	sampleNode2.setNext(sampleNode3);
+	sampleNode3.setNext(sampleNode4);
+	sampleNode4.setNext(sampleNode5);
+	sampleNode5.setNext(sampleNode6);
+
+	int exercise6Result = ex6(sampleNode1);
+	System.out.println(exercise6Result);
     }
     public static Node<Integer> ex1(Node<Integer> l1, Node<Integer> l2) {
 		Node<Integer> head = new Node<Integer>(-1, null);
@@ -144,4 +160,26 @@ public class Main {
         }
         System.out.println();
     }
+	public static int ex6(Node<Integer> head) {
+		Node<Integer> oldNode = head;
+		Node<Integer> newNode = head.getNext();
+		
+		int count = 1;
+		int maxCount = 0;
+		while (newNode.hasNext()) {
+			if (newNode.getValue() >= oldNode.getValue()) {
+				count++;
+			} else {
+				if (maxCount < count) {
+					maxCount = count;
+					count = 1;
+				}
+			}
+			
+			oldNode = newNode;
+			newNode = newNode.getNext();
+		}
+		
+		return maxCount;
+	}
 }
